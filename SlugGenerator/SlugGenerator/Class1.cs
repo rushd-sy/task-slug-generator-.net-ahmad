@@ -4,4 +4,9 @@
     {
 
     }
+    public static class Genrate
+    {
+        public static string Generate(string text) => text;
+        
+    }
 }
