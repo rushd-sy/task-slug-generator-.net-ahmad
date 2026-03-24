@@ -12,9 +12,6 @@ namespace SlugGenerator
             if(text.Length == 0)
                 throw new ArgumentException("text is empty");
 
-            Regex regex = new Regex("[\u0600-\u06ff]");
-           
-
             text = text.ToLower().Trim();
             
             text = Regex.Replace(text, @"[^\p{L}\d\s-_]", "");
@@ -24,9 +21,7 @@ namespace SlugGenerator
 
             text = Regex.Replace(text, @"[\s_-]+", "-");
 
-
             return text;
-        }
-      
+        }      
     }
 }
