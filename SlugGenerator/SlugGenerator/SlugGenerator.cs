@@ -11,10 +11,8 @@ namespace SlugGenerator
 
             if(text.Length == 0)
                 throw new ArgumentException("text is empty");
-
-            text = text.ToLower().Trim();
-            
-            text = Regex.Replace(text, @"[^\p{L}\d\s-_]", "");
+       
+            text = Regex.Replace(text, @"[^\p{L}\d\s-_]", "").ToLower().Trim();
 
             if (text.Length == 0)
                 throw new ArgumentException("text contain only symbols");
