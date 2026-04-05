@@ -64,5 +64,6 @@ namespace SlugGenerator.Tests
 
 
         }
+
     }
 }
