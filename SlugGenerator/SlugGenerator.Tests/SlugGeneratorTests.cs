@@ -64,5 +64,11 @@ namespace SlugGenerator.Tests
 
 
         }
+
+        [Fact]
+        public void testwrong()
+        {
+            Assert.Equal(1,2);
+        }
     }
 }
