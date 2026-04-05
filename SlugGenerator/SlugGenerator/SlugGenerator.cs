@@ -2,6 +2,7 @@
 
 namespace SlugGenerator
 {
+
     public static class SlugGenerator
     {
         public static string Generate(string text)
@@ -20,6 +21,7 @@ namespace SlugGenerator
             text = Regex.Replace(text, @"[\s_-]+", "-");
 
             return text;
-        }      
+        }     
+
     }
 }
