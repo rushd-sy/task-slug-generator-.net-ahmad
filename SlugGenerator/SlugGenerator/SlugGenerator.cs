@@ -2,6 +2,10 @@
 
 namespace SlugGenerator
 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35a971d75997afe97d5e4c58583478470a664d74
     public static class SlugGenerator
     {
         public static string Generate(string text)
@@ -20,7 +24,11 @@ namespace SlugGenerator
             text = Regex.Replace(text, @"[\s_-]+", "-");
 
             return text;
+<<<<<<< HEAD
         }      
+=======
+        }     
+>>>>>>> 35a971d75997afe97d5e4c58583478470a664d74
 
     }
 }
