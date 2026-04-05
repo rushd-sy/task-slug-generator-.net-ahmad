@@ -2,7 +2,7 @@
 
 namespace SlugGenerator
 {
-    public static class Genrate
+    public static class SlugGenrator
     {
         public static string Generate(string text)
         {
