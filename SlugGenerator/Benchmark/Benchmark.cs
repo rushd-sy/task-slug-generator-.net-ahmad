@@ -11,7 +11,7 @@ namespace Benchmark
 
 
         [Benchmark]
-        public StringBuilder Generate()
+        public string Generate()
         {   
             StringBuilder text = new StringBuilder(input.Length);        
             
@@ -30,7 +30,7 @@ namespace Benchmark
 
             if (text.Length > 0 && text[text.Length - 1] == '-')
                 text.Length--;
-            return text;
+            return text.ToString();
         }
 
 
