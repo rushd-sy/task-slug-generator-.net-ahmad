@@ -22,7 +22,7 @@ namespace SlugGenerator
 
             return text;
         }
-        public static string GenerateUnique(this string text)
+        public static string GenerateUnique(string text)
         {
             var slug = Generate(text);      
             return slug + "-" + Guid.NewGuid().ToString();

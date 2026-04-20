@@ -1,7 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System.Text;
 using System.Text.RegularExpressions;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Benchmark
 {
@@ -38,9 +37,9 @@ namespace Benchmark
         [Benchmark]
         public string UsingRegex()
         {
-            input = Regex.Replace(input, @"[^\p{L}\d\s-_]", "").ToLower().Trim();
+           var  result = Regex.Replace(input, @"[^\p{L}\d\s-_]", "").ToLower().Trim();
 
-            return Regex.Replace(input, @"[\s_-]+", "-");
+            return Regex.Replace(result, @"[\s_-]+", "-");
         }
 
     }
