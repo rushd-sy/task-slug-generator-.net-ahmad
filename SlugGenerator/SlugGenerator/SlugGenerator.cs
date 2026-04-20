@@ -22,10 +22,10 @@ namespace SlugGenerator
 
             return text;
         }
-        public static string GenerateUnique(string text)
+        public static string GenerateUnique(this string text)
         {
-            var value = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
-            return text + "-" + value.Substring(7);
+            var slug = Generate(text);      
+            return slug + "-" + Guid.NewGuid().ToString();
         }
 
     }

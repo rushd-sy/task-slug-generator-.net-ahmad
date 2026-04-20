@@ -6,9 +6,7 @@ namespace Benchmark
     {
         static void Main(string[] args)
         {
-            var result = BenchmarkRunner.Run<Benchmark>();
-
+           BenchmarkRunner.Run<Benchmark>();
         }
-
     }
 }

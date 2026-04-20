@@ -1,29 +1,36 @@
 ﻿using BenchmarkDotNet.Attributes;
+using System.Text;
 using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Benchmark
 {
     [MemoryDiagnoser]
     public class Benchmark
     {
+        private string input = "Example text with numbers 123 and symbols !!!";
+
+
         [Benchmark]
-        public string Generate()
-        {
-            var text = "vghvgkfty#%%#@ cyj";
+        public StringBuilder Generate()
+        {   
+            StringBuilder text = new StringBuilder(input.Length);        
+            
+            foreach (var c in input)
+            {
+                if (char.IsLetterOrDigit(c))
+                {
+                    text.Append(char.ToLowerInvariant(c));
+                }
+                else if (char.IsWhiteSpace(c)  || c == '_')
+                {
+                    if (text.Length > 0 && text[text.Length - 1] != '-')
+                        text.Append('-');
+                }
+            }
 
-            if (text is null)
-                throw new ArgumentNullException("Text");
-
-            if (text.Length == 0)
-                throw new ArgumentException("text is empty");
-
-            text = Regex.Replace(text, @"[^\p{L}\d\s-_]", "").ToLower().Trim();
-
-            if (text.Length == 0)
-                throw new ArgumentException("text contain only symbols");
-
-            text = Regex.Replace(text, @"[\s_-]+", "-");
-
+            if (text.Length > 0 && text[text.Length - 1] == '-')
+                text.Length--;
             return text;
         }
 
@@ -31,7 +38,9 @@ namespace Benchmark
         [Benchmark]
         public string UsingRegex()
         {
-            return Regex.Replace("vghvgkfty#%%#@ cyj", @"[\s_-]+", "-");
+            input = Regex.Replace(input, @"[^\p{L}\d\s-_]", "").ToLower().Trim();
+
+            return Regex.Replace(input, @"[\s_-]+", "-");
         }
 
     }
