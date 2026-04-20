@@ -77,7 +77,7 @@ namespace SlugGenerator.Tests
         [Fact]
         public void GenerateUnique_ForHighFrequencyCalls_ReturnNonDuplicateSlugs()
         {
-         
+
             var results = new HashSet<string>();
 
             for (int i = 0; i < 1000; i++)
@@ -86,6 +86,7 @@ namespace SlugGenerator.Tests
             }
 
             Assert.Equal(1000, results.Count);
+
             
         }
     }
