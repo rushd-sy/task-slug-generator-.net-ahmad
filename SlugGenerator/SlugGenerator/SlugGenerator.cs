@@ -5,7 +5,7 @@ namespace SlugGenerator
 
     public static class SlugGenerator
     {
-        public static string Generate(string text)
+        public static string Generate(this string text)
         {
             if(text is null)
               throw new ArgumentNullException("Text");
@@ -21,7 +21,12 @@ namespace SlugGenerator
             text = Regex.Replace(text, @"[\s_-]+", "-");
 
             return text;
-        }     
+        }
+        public static string GenerateUnique(string text)
+        {
+            var slug = Generate(text);      
+            return slug + "-" + Guid.NewGuid().ToString();
+        }
 
     }
 }

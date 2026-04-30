@@ -7,11 +7,10 @@ namespace SlugGenerator.Tests
         [Fact]
         public void Generate_TextIsNull_ThrowArgumentNullException()
         {
-            string text = null;
+            
+            Func<string?, string> func = (e) => SlugGenerator.Generate(null!);
 
-            Func<string, string> func = (e) => SlugGenerator.Generate(text);
-
-            Assert.Throws<ArgumentNullException>(() => func(text));
+            Assert.Throws<ArgumentNullException>(() => func(null));
 
         }
 
@@ -65,5 +64,30 @@ namespace SlugGenerator.Tests
 
         }
 
+        [Fact]
+        public void GenerateUnique_ForMultipleCalls_ReturnSlugTextWithUniqueValue()
+        {
+            string text = "A__B C";
+            var call1 = SlugGenerator.GenerateUnique(text);
+            var call2 = SlugGenerator.GenerateUnique(text);
+                
+            Assert.NotEqual(call1, call2);
+        }
+
+        [Fact]
+        public void GenerateUnique_ForHighFrequencyCalls_ReturnNonDuplicateSlugs()
+        {
+
+            var results = new HashSet<string>();
+
+            for (int i = 0; i < 1000; i++)
+            {
+                results.Add(SlugGenerator.GenerateUnique("test"));
+            }
+
+            Assert.Equal(1000, results.Count);
+
+            
+        }
     }
 }

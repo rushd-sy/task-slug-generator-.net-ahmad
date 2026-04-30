@@ -1,4 +1,5 @@
 <Solution>
+    <Project Path="Benchmark/Benchmark.csproj" />
   <Project Path="SlugGenerator.Tests/SlugGenerator.Tests.csproj" />
   <Project Path="SlugGenerator/SlugGenerator.csproj" />
 </Solution>
