@@ -3,9 +3,9 @@
 namespace SlugGenerator
 {
 
-    public static class SlugGenerator
+    public static class SlugGeneratorExtensions
     {
-        public static string Generate(string text, char separator = '-')
+        public static string ToSlug(this string text , char separator = '-')
         {
             if(text is null)
               throw new ArgumentNullException("Text");
@@ -22,10 +22,10 @@ namespace SlugGenerator
 
             return text;
         }
-        public static string GenerateUnique(string text , char separator = '-')
+        public static string ToSlugUnique(this string text, char separator = '-')
         {
-            var slug = Generate(text, separator);      
-            return slug + separator + Guid.NewGuid().ToString();
+            text = text.ToSlug(separator);      
+            return text + separator + Guid.NewGuid().ToString();
         }
 
     }
