@@ -7,17 +7,9 @@ namespace SlugGenerator
     {
         public static string Generate(string text, char separator = '-')
         {
-            if(text is null)
-              throw new ArgumentNullException("Text");
-
-            if(text.Length == 0)
-                throw new ArgumentException("text is empty");
-       
-            text = Regex.Replace(text, @"[^\p{L}\d\s-_]", "").ToLower().Trim();
-
-            if (text.Length == 0)
-                throw new ArgumentException("text contain only symbols");
-
+            ArgumentException.ThrowIfNullOrWhiteSpace(text);
+            text = Regex.Replace(text, @"[^\p{L}\d\s_-]", "").ToLowerInvariant().Trim();
+            ArgumentException.ThrowIfNullOrEmpty(text);
             text = Regex.Replace(text, @"[\s_-]+", separator.ToString());
 
             return text;
@@ -25,8 +17,7 @@ namespace SlugGenerator
         public static string GenerateUnique(string text , char separator = '-')
         {
             var slug = Generate(text, separator);      
-            return slug + separator + Guid.NewGuid().ToString();
+            return slug + separator + Guid.NewGuid().ToString("N");
         }
-
     }
 }

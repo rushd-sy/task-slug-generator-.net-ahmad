@@ -89,5 +89,31 @@ namespace SlugGenerator.Tests
 
             
         }
+
+        [Fact]
+        public void Generate_ForAddSeparator_ReturnSlugText()
+        {
+            string text = "A__B C";
+            char separator = '$';
+
+            var actual = SlugGenerator.Generate(text,separator);
+
+            var expected = Regex.Escape("a$b$c");
+
+            Assert.Matches(expected, actual);
+        }
+
+        [Fact]
+        public void ToSlug_ForAddSeparator_ReturnSlugText()
+        {
+            string text = "A__B C";
+            char separator = '$';
+
+            var actual = text.ToSlug(separator);
+
+            var expected = Regex.Escape("a$b$c");
+
+            Assert.Matches(expected, actual);
+        }
     }
 }
