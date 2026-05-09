@@ -5,28 +5,19 @@ namespace SlugGenerator
 
     public static class SlugGenerator
     {
-        public static string Generate(this string text)
+        public static string Generate(string text, char separator = '-')
         {
-            if(text is null)
-              throw new ArgumentNullException("Text");
-
-            if(text.Length == 0)
-                throw new ArgumentException("text is empty");
-       
-            text = Regex.Replace(text, @"[^\p{L}\d\s-_]", "").ToLower().Trim();
-
-            if (text.Length == 0)
-                throw new ArgumentException("text contain only symbols");
-
-            text = Regex.Replace(text, @"[\s_-]+", "-");
+            ArgumentException.ThrowIfNullOrWhiteSpace(text);
+            text = Regex.Replace(text, @"[^\p{L}\d\s_-]", "").ToLowerInvariant().Trim();
+            ArgumentException.ThrowIfNullOrEmpty(text);
+            text = Regex.Replace(text, @"[\s_-]+", separator.ToString());
 
             return text;
         }
-        public static string GenerateUnique(string text)
+        public static string GenerateUnique(string text , char separator = '-')
         {
-            var slug = Generate(text);      
-            return slug + "-" + Guid.NewGuid().ToString();
+            var slug = Generate(text, separator);      
+            return slug + separator + Guid.NewGuid().ToString("N");
         }
-
     }
 }
